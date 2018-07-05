@@ -10,15 +10,17 @@ def get_items():
     to_return = []
     for hit in data.get('hits', {}).get('hits', []):
         doc = hit.get('metadata')
+        docPid = doc.get('pid')
         items = doc.get('itemslist')
         title = doc.get('title')
-        authors = doc.get('authos')
+        authors = doc.get('authors')
         for item in items:
             if title:
                 item['title'] = title
             if authors:
                 item['authors'] = authors
             item['id'] = item['pid']
+            item['document_pid'] =docPid
             to_return.append(item)
     return to_return
 
